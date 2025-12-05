@@ -42,8 +42,9 @@ const Navbar = () => {
               <Link to="/services">Services</Link>
             </li>
             <li>
-              <Link to="/profile">My Profile</Link>
+              <Link to={"/profile"}>My Profile</Link>
             </li>
+            <Link to={"/add-services"}>Add Services</Link>
           </ul>
         </div>
         <a className="btn btn-ghost text-xl">Pet Paw</a>
@@ -58,7 +59,10 @@ const Navbar = () => {
             <Link to="/services">Services</Link>
           </li>
           <li>
-            <Link to="/profile">My Profile</Link>
+            <Link to={"/profile"}>My Profile</Link>
+          </li>
+          <li>
+              <Link to={"/add-services"}>Add Services</Link>
           </li>
         </ul>
       </div>

@@ -4,11 +4,14 @@ const PopularSection = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch('./services.json')
+    fetch('http://localhost:3000/services')
       .then(res => res.json())
       .then(data => setServices(data))
       .catch(err => console.log(err));
   }, []);
+
+  console.log(services);
+  
 
   return (
     <div className="mt-8 px-4 md:px-10 lg:px-[130px]">
@@ -30,10 +33,10 @@ const PopularSection = () => {
               />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">{service?.serviceName}</h2>
+              <h2 className="card-title">{service?.name}</h2>
               <div className="flex justify-between">
                 <p>Price: {service?.price}</p>
-                <p>Rating: {service?.rating}</p>
+                <p>Date: {service?.date}</p>
               </div>
               <div className="card-actions justify-end">
                 <button className="btn btn-primary">View Details</button>
