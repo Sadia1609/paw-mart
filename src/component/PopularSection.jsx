@@ -37,7 +37,7 @@ const PopularSection = () => {
               <h2 className="card-title">{service?.name}</h2>
               <div className="flex justify-between">
                 <p>Price: {service?.price}</p>
-                <p>Date: {service?.date}</p>
+                <p>Category: {service?.category}</p>
               </div>
               <div className="card-actions justify-end">
                <Link to={`/details/${service?._id}`}>
