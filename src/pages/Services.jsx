@@ -6,7 +6,7 @@ const Services = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch('/services.json')
+    fetch('http://localhost:3000/services')
       .then(res => res.json())
       .then(data => setServices(data))
       .catch(err => console.log(err));
@@ -32,17 +32,17 @@ const Services = () => {
               <img
                 className="w-full h-56 sm:h-64 md:h-72 object-cover"
                 src={service?.image}
-                alt={service?.serviceName}
+                alt={service?.name}
               />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">{service?.serviceName}</h2>
+              <h2 className="card-title">{service?.name}</h2>
               <div className="flex justify-between text-sm sm:text-base">
                 <p>Price: {service?.price}</p>
-                <p>Rating: {service?.rating}</p>
+                <p>Date: {service?.date}</p>
               </div>
               <div className="card-actions justify-end mt-2">
-                <Link to={`/details/${service?.serviceId}`}>
+                <Link to={`/details/${service?._id}`}>
                   <button className="btn btn-primary btn-sm sm:btn-md">View Details</button>
                 </Link>
               </div>

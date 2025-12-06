@@ -55,7 +55,7 @@ const AddService = () => {
 
     return (
        <div className="max-w-xl mx-auto bg-white shadow-md rounded-xl p-6 mt-8 my-12">
-      <h2 className="text-2xl font-semibold text-center mb-6">Add Product</h2>
+      <h2 className="text-2xl font-semibold text-center mb-6">Create Listing</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Pet Name */}
