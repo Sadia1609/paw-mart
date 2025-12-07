@@ -2,9 +2,9 @@
 
 ---
 
-Live Client: 
+Live Client: https://pet-care-8ba14.web.app/
 
-Live Server: 
+Live Server: https://paw-mart-two.vercel.app/
 
 ---
 
