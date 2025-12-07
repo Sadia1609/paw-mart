@@ -62,18 +62,20 @@ const Navbar = () => {
             <li>
               <Link to="/services">Pets & Supplies</Link>
             </li>
+
+           
            
            {
             user && (
               <>
-               <li>
-              <Link to={"/profile"}>My Profile</Link>
+               
+              <Link to={"/profile"}></Link>
+            
+            <li>
+              <Link to={"/add-services"}>Add Listing</Link>
             </li>
             <li>
-              <Link to={"/add-services"}>Add Services</Link>
-            </li>
-            <li>
-              <Link to={"/my-services"}>My Services</Link>
+              <Link to={"/my-services"}>My Listings</Link>
           </li>
            <li>
               <Link to={"/my-orders"}>My Orders</Link>
@@ -101,14 +103,14 @@ const Navbar = () => {
          {
             user && (
               <>
-               <li>
-              <Link to={"/profile"}>My Profile</Link>
+               
+              <Link to={"/profile"}></Link>
+           
+            <li>
+              <Link to={"/add-services"}>Add Listing</Link>
             </li>
             <li>
-              <Link to={"/add-services"}>Add Services</Link>
-            </li>
-            <li>
-              <Link to={"/my-services"}>My Services</Link>
+              <Link to={"/my-services"}>My Listings</Link>
           </li>
           <li>
               <Link to={"/my-orders"}>My Orders</Link>
@@ -119,47 +121,7 @@ const Navbar = () => {
         </ul>
       </div>
 
-
-      <div className="navbar-end gap-4">
-       
-      
-        {user ? (
-
-
-<>
-
-
-              <div className="avatar cursor-pointer">
-        <div className="w-10 h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-          <img
-            src={user.photoURL}
-            alt="Profile"
-          />
-        </div>
-      </div>
-
-
-        
-          <button onClick={handleSignout} className="btn">
-            
-            Logout
-          </button>
-          </>
-        ) : (
-          <Link to="/login" className="btn">
-            Login
-          </Link>
-        )}
-      </div> 
-
-       
-
-
-
-
-
-      
-         <div className='navbar-end'>
+       <div className='navbar-end'>
            <label className="flex cursor-pointer gap-2">
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -191,6 +153,58 @@ const Navbar = () => {
 </label>
 
          </div>
+
+
+      <div className="navbar-end gap-4">
+       
+      
+        {user ? (
+
+
+<>
+
+
+        <Link to={'/profile'} className="avatar cursor-pointer">
+        <div className="w-10 h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+          <img
+            src={user.photoURL}
+            alt="Profile"
+          />
+        </div>
+      </Link>
+
+
+        
+          <button onClick={handleSignout} className="btn">
+            
+            Logout
+          </button>
+          </>
+        ) : (
+          <>
+
+
+          <div className="flex items-center space-x-2">
+            <Link to="/login" className="btn btn-sm">
+              Login
+            </Link>
+
+            <Link to="/signup" className="btn btn-neutral btn-sm">
+              Register
+            </Link>
+          </div>
+
+            </>
+        )}
+      </div> 
+
+       
+
+
+
+
+
+      
 
     </div>
   );

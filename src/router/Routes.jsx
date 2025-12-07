@@ -13,6 +13,9 @@ import AddService from "../pages/AddService";
 import MyServices from "../pages/MyServices";
 import UpdateService from "../pages/UpdateService";
 import MyOrders from "../pages/MyOrders";
+import Contact from "../pages/Contact";
+import Terms from "../pages/Terms";
+import CategoryFilteredProduct from "../pages/CategoryFilteredProduct";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -63,6 +66,20 @@ const router = createBrowserRouter([
         {
           path:'/update-services/:id',
           element:<PrivateRoute><UpdateService></UpdateService></PrivateRoute>
+        },
+
+        {
+          path:'/contact',
+          element:<PrivateRoute><Contact></Contact></PrivateRoute>
+        },
+
+        {
+          path:'/terms',
+          element:<PrivateRoute><Terms></Terms></PrivateRoute>
+        },
+        {
+          path:"/category-filtered-product/:categoryName",
+          element:<CategoryFilteredProduct />
         }
     ]
   },

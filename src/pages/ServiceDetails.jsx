@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const ServiceDetails = () => {
      const [service, setService] = useState([]);
@@ -54,6 +55,10 @@ const ServiceDetails = () => {
             axios.post('http://localhost:3000/orders', formData)
             .then(res=>{
               console.log(res);
+              toast.success("Order Placed Successfully!");
+
+
+              document.getElementById("my_modal_3").close();
               
             })
             .catch(err=>{

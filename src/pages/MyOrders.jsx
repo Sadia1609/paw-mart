@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
+
 const MyOrders = () => {
 
     //fetch orders
@@ -10,6 +11,7 @@ const MyOrders = () => {
         axios.get('http://localhost:3000/orders')
         .then(res=>{
             setMyOrders(res.data);
+             
         })
         .catch(err=>{
             console.log(err);
