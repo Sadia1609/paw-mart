@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import auth from '../firebase/firebase.config';
 import { FcGoogle } from "react-icons/fc";
+import toast from 'react-hot-toast';
 
 const Login = () => {
 
@@ -25,7 +26,8 @@ const Login = () => {
     
     const user = userCredential.user;
     setUser(user)
-    navigate(location.state)
+    toast('Login Successfully!')
+    navigate(location.state? location.state: '/')
    
   })
   .catch((error) => {
@@ -39,6 +41,7 @@ const Login = () => {
     .then(result=>{
       const user = result.user
       setUser(user)
+       toast('Login Successfully!')
       navigate(location.state? location.state : '/')
     })
     .catch(err=> console.log(err))

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import { signOut } from 'firebase/auth';
 import auth from '../firebase/firebase.config';
+import pawLogo from '../assets/logo.png';
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
@@ -59,7 +60,7 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/services">Services</Link>
+              <Link to="/services">Pets & Supplies</Link>
             </li>
            
            {
@@ -82,7 +83,11 @@ const Navbar = () => {
            }
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Pet Paw</a>
+       <div className="flex items-center gap-2">
+        <img src={pawLogo} alt="" className="h-8 w-8" />
+        <span className="text-xl font-bold">PawMart</span>
+      </div>
+
       </div>
 
       <div className="navbar-center hidden lg:flex">
@@ -91,7 +96,7 @@ const Navbar = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/services">Services</Link>
+            <Link to="/services">Pets & Supplies</Link>
           </li>
          {
             user && (
@@ -115,17 +120,42 @@ const Navbar = () => {
       </div>
 
 
-      <div className="navbar-end">
+      <div className="navbar-end gap-4">
+       
+      
         {user ? (
+
+
+<>
+
+
+              <div className="avatar cursor-pointer">
+        <div className="w-10 h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+          <img
+            src={user.photoURL}
+            alt="Profile"
+          />
+        </div>
+      </div>
+
+
+        
           <button onClick={handleSignout} className="btn">
+            
             Logout
           </button>
+          </>
         ) : (
           <Link to="/login" className="btn">
             Login
           </Link>
         )}
-      </div>
+      </div> 
+
+       
+
+
+
 
 
       
