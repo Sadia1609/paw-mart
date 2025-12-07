@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router';
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router";
 
 const CategoryFilteredProduct = () => {
   const { categoryName } = useParams();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`https://paw-mart-two.vercel.app/services?category=${encodeURIComponent(categoryName)}`)
+    fetch(
+      `https://paw-mart-two.vercel.app/services?category=${encodeURIComponent(
+        categoryName
+      )}`
+    )
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.log(err));
@@ -14,6 +18,7 @@ const CategoryFilteredProduct = () => {
 
   return (
     <div className="py-12 px-4 sm:px-8 md:px-16 lg:px-36">
+      <title>Products</title>
       <h2 className="text-3xl font-bold text-center text-primary mb-8">
         {categoryName}
       </h2>
@@ -47,4 +52,3 @@ const CategoryFilteredProduct = () => {
 };
 
 export default CategoryFilteredProduct;
-

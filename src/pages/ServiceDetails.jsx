@@ -71,6 +71,7 @@ const ServiceDetails = () => {
          
     return (
         <div className="flex flex-col items-center px-4 sm:px-8 md:px-16 py-8 space-y-6 text-center">
+          <title>Product Details</title>
   <img
     className="w-full max-w-md rounded-lg shadow-md object-cover"
     src={service?.image}

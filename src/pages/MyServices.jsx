@@ -1,23 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../Provider/AuthProvider';
-import { Link } from 'react-router';
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
+import { Link } from "react-router";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const MyServices = () => {
   const [myServices, setMyServices] = useState([]);
   const { user } = useContext(AuthContext);
 
-  
   useEffect(() => {
     if (!user?.email) return;
-    
-    fetch(`https://paw-mart-two.vercel.app/my-services?email=${user.email}`)
-      .then(res => res.json())
-      .then(data => setMyServices(data))
-      .catch(err => console.log(err));
-  }, [user?.email]);
 
+    fetch(`https://paw-mart-two.vercel.app/my-services?email=${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setMyServices(data))
+      .catch((err) => console.log(err));
+  }, [user?.email]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -27,27 +25,27 @@ const MyServices = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        
-        axios.delete(`https://paw-mart-two.vercel.app/delete/${id}`)
-          .then(res => {
+        axios
+          .delete(`https://paw-mart-two.vercel.app/delete/${id}`)
+          .then((res) => {
             console.log(res.data);
-            if(res.data.deletedCount==1){
+            if (res.data.deletedCount == 1) {
+              const filterData = myServices.filter(
+                (service) => service._id !== id
+              );
+              setMyServices(filterData);
 
-              
-            const filterData = myServices.filter(service => service._id !== id);
-            setMyServices(filterData);
-
-            Swal.fire("Deleted!", "Your service has been deleted.", "success");
-
+              Swal.fire(
+                "Deleted!",
+                "Your service has been deleted.",
+                "success"
+              );
             }
-
-
-            
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
       }
@@ -56,7 +54,8 @@ const MyServices = () => {
 
   return (
     <div>
-      <h2>My Services</h2>
+      <title>My Listings</title>
+      <h2>My Listings</h2>
 
       <div className="overflow-x-auto">
         <table className="table">
@@ -70,7 +69,7 @@ const MyServices = () => {
           </thead>
 
           <tbody>
-            {myServices?.map(service =>
+            {myServices?.map((service) => (
               <tr key={service._id}>
                 <td>
                   <div className="flex items-center gap-3">
@@ -88,10 +87,11 @@ const MyServices = () => {
                 <td>{service.description}</td>
                 <td>{service.price}</td>
 
-                <td className='flex gap-3'>
-                  <button 
-                    onClick={() => handleDelete(service._id)} 
-                    className="btn btn-error btn-xs">
+                <td className="flex gap-3">
+                  <button
+                    onClick={() => handleDelete(service._id)}
+                    className="btn btn-error btn-xs"
+                  >
                     Delete
                   </button>
 
@@ -100,9 +100,8 @@ const MyServices = () => {
                   </Link>
                 </td>
               </tr>
-            )}
+            ))}
           </tbody>
-
         </table>
       </div>
     </div>

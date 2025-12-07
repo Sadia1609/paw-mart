@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 
@@ -5,10 +6,16 @@ const PopularSection = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch('https://paw-mart-two.vercel.app/recent-services')
-      .then(res => res.json())
-      .then(data => setServices(data))
-      .catch(err => console.log(err));
+    axios.get('https://paw-mart-two.vercel.app/recent-services')
+      .then(res=>{
+        setServices(res.data)
+        console.log(res.data);
+        
+      })
+      .catch(err => {
+        console.log(err);
+        
+      })
   }, []);
 
   

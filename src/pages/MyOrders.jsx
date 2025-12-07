@@ -2,57 +2,67 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const MyOrders = () => {
+  const { user } = useContext(AuthContext);
   const [myOrders, setMyOrders] = useState([]);
 
   // Fetch orders from backend
   useEffect(() => {
     axios
-      .get("https://paw-mart-two.vercel.app/orders")
+      .get(`https://paw-mart-two.vercel.app/orders/${user?.email}`)
       .then((res) => setMyOrders(res.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [user?.email]);
 
   const exportPDF = () => {
-  const doc = new jsPDF();
+    const doc = new jsPDF();
 
-  doc.setFontSize(18);
-  doc.text("My Orders Report", 14, 22);
+    doc.setFontSize(18);
+    doc.text("My Orders Report", 14, 22);
 
-  const tableColumn = ["No", "Product Name", "Price", "Phone", "Location", "Quantity", "Date"];
-  const tableRows = myOrders.map((order, index) => [
-    index + 1,
-    order.productName,
-    order.price,
-    order.phone,
-    order.address,
-    order.quantity,
-    new Date(order.date).toLocaleString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    }),
-  ]);
+    const tableColumn = [
+      "No",
+      "Product Name",
+      "Price",
+      "Phone",
+      "Location",
+      "Quantity",
+      "Date",
+    ];
+    const tableRows = myOrders.map((order, index) => [
+      index + 1,
+      order.productName,
+      order.price,
+      order.phone,
+      order.address,
+      order.quantity,
+      new Date(order.date).toLocaleString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      }),
+    ]);
 
-  autoTable(doc, {
-    head: [tableColumn],
-    body: tableRows,
-    startY: 30,
-    styles: { fontSize: 10 },
-    headStyles: { fillColor: [41, 128, 185] },
-  });
+    autoTable(doc, {
+      head: [tableColumn],
+      body: tableRows,
+      startY: 30,
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [41, 128, 185] },
+    });
 
-  doc.save("my_orders_report.pdf");
-};
-
+    doc.save("my_orders_report.pdf");
+  };
 
   return (
     <div className="p-5">
+      <title>My Orders</title>
       <div className="flex justify-end mb-4">
         <button className="btn btn-primary btn-sm" onClick={exportPDF}>
           Export as PDF
@@ -101,4 +111,3 @@ const MyOrders = () => {
 };
 
 export default MyOrders;
-

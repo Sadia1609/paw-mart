@@ -1,61 +1,127 @@
-Winter Pet Care
-A modern and responsive web application that helps pet owners take better care of their pets during cold and snowy seasons. The platform offers seasonal tips, professional consultations, and various pet-friendly winter services. Built using React, styled with Tailwind CSS, and enhanced with smooth animations and UI components.
+# PawMart — Pet Adoption & Supply Portal
 
-Live Demo
-👉 Live URL: Add your deployed link here
+---
 
-Project Purpose
-Winter Pet Care is designed to support pet owners with essential resources during the winter months. The platform provides expert advice, tips, and services to ensure pets stay warm, safe, and healthy in cold weather.
+Live Client: 
 
-Key Features
-1. Winter Pet Care Tips
-Practical advice for keeping pets warm indoors.
+Live Server: 
 
-Paw protection, nutrition tips, and seasonal hazards to avoid.
+---
 
-2. Pet Consultation
-Connect with doctors or experts for winter-specific pet care guidance.
+PawMart is a community-driven platform built for pet owners, breeders, and pet shops to list pets for adoption and sell pet-related products. Users can browse listings, view details, adopt pets, place orders, and manage their own listings—all through a clean and modern UI.
 
-Easy-to-understand recommendations and FAQs.
+---
 
-3. Winter Services
-Grooming
+## 🚀 Features
 
-Pet Boarding
+🐶 Pet Adoption + Pet Supply Marketplace with category filtering
 
-Medical Checkups
+🔐 Secure Authentication using Firebase (Email/Password + Google Login)
 
-Emergency Support
+📦 Add Listings, Manage Listings, and Order Products/Pets
 
-Custom winter packages
+🧾 Order PDF Report Download using jsPDF & AutoTable
 
-4. Modern UI & Smooth Animations
-Beautiful, clean interface using Tailwind & DaisyUI
+🎨 Modern UI + Animations using Tailwind, Framer Motion, and Typewriter
 
-Smooth page transitions with Framer Motion
+🌙 Dark/Light Mode Toggle (Bonus Feature)
 
-Interactive sliders using Swiper.js
+🔄 Full CRUD Operations with Toast Notifications
 
-Toaster notifications for actions and feedback
+📱 100% Responsive across mobile, tablet, and desktop
+
+---
+
+## 🏗️ Project Pages & Structure
+
+#### 🔹 Home Page
+
+Banner slider with meaningful pet images
+
+Category section (Pets, Food, Accessories, Care Products)
+
+Recent 6 listings
+
+Extra sections:
+
+Why Adopt from PawMart
+
+Meet Our Pet Heroes
+
+## 🔹 Authentication
+
+Login / Register with validations
+
+Google Sign-in
+
+react-hot-toast for alerts
+
+## 🔹 Pets & Supplies Page
+
+Full product listing grid
+
+Category filtering + Search
+
+## 🔹 Add Listing (Private)
+
+Add new pets/products
+
+Auto-fill user email
+
+Toast on success
+
+## 🔹 Listing Details (Private)
+
+View full details
+
+“Adopt / Order Now” modal
+
+Save order to MongoDB
+
+## 🔹 My Listings (Private)
+
+Update/Delete user's own listings
+
+Data table layout
+
+## 🔹 My Orders (Private)
+
+List of orders made by user
+
+Download Report (PDF)
+
+## 🔹 Other Pages
+
+404 Page
 
 
-Technologies & NPM Packages Used
-Frontend:-
-react.js
+Responsive Navbar + Footer
 
-Vite
+🗄️ Tech Stack
+Frontend
 
-Styling & UI
+React.js
+
+React Router
 
 Tailwind CSS
 
-DaisyUI
+Firebase Auth
 
-Animations & Interaction:-
-Framer Motion — page and element animations
+Axios
 
-Swiper.js — sliders for services, testimonials, banners
+Framer Motion / Typewriter
 
-React Hot Toast / Toaster — for notifications
+react-hot-toast
 
+Backend
 
+Node.js
+
+Express.js
+
+MongoDB
+
+CORS
+
+Dotenv

@@ -22,6 +22,7 @@ const Services = () => {
 
   return (
     <div className="px-4 sm:px-8 md:px-16 lg:px-36 py-8 sm:py-12">
+      <title>PawMart | Products</title>
       <div>
         <h3 className="font-bold text-center text-3xl text-blue-400">Fresh Pet & Supplies</h3>
       </div>

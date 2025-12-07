@@ -24,6 +24,7 @@ const ForgetPass = () => {
 
     return (
         <div className='flex justify-center items-center my-24'>
+            <title>Forget Password</title>
              <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
       <div className="card-body">
              <form onSubmit={handleSubmit} className="fieldset">

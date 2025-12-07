@@ -1,93 +1,76 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../Provider/AuthProvider';
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import React, { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddService = () => {
+  const { user } = useContext(AuthContext);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    
-        const {user} = useContext(AuthContext)
+    const form = e.target;
 
+    const name = form.petName.value;
+    const category = form.category.value;
+    const price = parseInt(form.price.value);
+    const location = form.location.value;
+    const description = form.description.value;
+    const image = form.image.value;
+    const date = form.date.value;
+    const email = form.email.value;
 
+    const formData = {
+      name,
+      category,
+      price,
+      location,
+      description,
+      image,
+      date,
+      email,
+    };
 
-    const handleSubmit = (e)=>{
+    console.log(formData);
+    axios
+      .post("https://paw-mart-two.vercel.app/services", formData)
+      .then((res) => {
+        console.log(res);
 
-        
-        
-
-        e.preventDefault();
-
-        const form = e.target;
-
-        const name = form.petName.value;
-        const category = form.category.value;
-        const price = parseInt(form.price.value);
-        const location = form.location.value;
-        const description = form.description.value;
-        const image = form.image.value;
-        const date = form.date.value;
-        const email = form.email.value;
-
-
-        const formData = {
-            name, 
-            category,
-            price,
-            location,
-            description,
-            image,
-            date,
-            email,
-
-        }
-
-        console.log(formData);
-        axios.post('https://paw-mart-two.vercel.app/services', formData)
-        .then(res=>{
-            console.log(res);
-            
-            if(res.data.acknowledged){
-              Swal.fire({
+        if (res.data.acknowledged) {
+          Swal.fire({
             position: "top-end",
             icon: "success",
             title: "Service is created successfully!",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
 
-          form.reset()
-            }
-            else{
-              Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Something went wrong!"
-             
-            });
-            }
-        })
-        .catch(err=>{
-          console.log(err);
+          form.reset();
+        } else {
           Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Something went wrong!"
-             
-            });
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      });
+  };
 
-          
-        })
-
-    }
-
-
-
-
-
-    return (
-       <div className="max-w-xl mx-auto bg-white shadow-md rounded-xl p-6 mt-8 my-12">
-      <h2 className="text-2xl font-semibold text-center mb-6">Create Listing</h2>
+  return (
+    <div className="max-w-xl mx-auto bg-white shadow-md rounded-xl p-6 mt-8 my-12">
+      <title>Add Listing</title>
+      <h2 className="text-2xl font-semibold text-center mb-6">
+        Create Listing
+      </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Pet Name */}
@@ -117,7 +100,7 @@ const AddService = () => {
         </div>
 
         {/* Price */}
-        <div >
+        <div>
           <label className="block mb-1 font-medium">Price</label>
           <input
             type="number"
@@ -126,7 +109,6 @@ const AddService = () => {
             min="0"
             required
           />
-         
         </div>
 
         {/* Location */}
@@ -183,7 +165,6 @@ const AddService = () => {
             type="email"
             name="email"
             readOnly
-            
             className="w-full input input-bordered rounded-lg bg-gray-100 cursor-not-allowed"
           />
         </div>
@@ -192,7 +173,7 @@ const AddService = () => {
         <button className="btn btn-primary w-full mt-4">Submit</button>
       </form>
     </div>
-    );
+  );
 };
 
 export default AddService;
