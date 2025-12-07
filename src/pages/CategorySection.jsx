@@ -1,46 +1,51 @@
-import React from "react";
-import { useNavigate } from "react-router";
-
-// Dummy images for categories
-import petsImg from "../assets/pets.jfif";
-import foodImg from "../assets/cat food.jfif";
-import accessoriesImg from "../assets/accessories.jfif";
-import careImg from "../assets/petcare.jfif";
+import React from 'react';
+import { Link } from 'react-router';
 
 const categories = [
-  { name: "Pets (Adoption)", image: petsImg },
-  { name: "Pet Food", image: foodImg },
-  { name: "Accessories", image: accessoriesImg },
-  { name: "Pet Care Products", image: careImg },
+  {
+    name: 'Pets',
+    category: 'Pets',
+    icon: '🐾',
+  },
+  {
+    name: 'Pet Food',
+    category: 'Food',
+    icon: '🍖',
+  },
+  {
+    name: 'Accessories',
+    category: 'Accessories',
+    icon: '🎀',
+  },
+  {
+    name: 'Pet Care Products',
+    category: 'Care-products',
+    icon: '🧴',
+  },
 ];
 
-const CategorySection = () => {
-  const navigate = useNavigate();
-
+const CategoryCards = () => {
   return (
-    <section className="my-10 px-4">
-      <h2 className="text-3xl font-bold text-center mb-8">Shop by Category</h2>
+    <div className="py-12 px-4 sm:px-8 md:px-16 lg:px-36">
+      <h2 className="text-3xl font-bold text-center text-primary mb-8">
+        Browse by Category
+      </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        {categories.map((category, idx) => (
-          <div
-            key={idx}
-            className="cursor-pointer border rounded-lg overflow-hidden shadow hover:shadow-lg transition"
-            onClick={() =>
-              navigate(`/category-filtered-product/${encodeURIComponent(category.name)}`)
-            }
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {categories.map((cat) => (
+          <Link
+            key={cat.name}
+            to={`/category-filtered-product/${encodeURIComponent(cat.category)}`}
           >
-            <img
-              src={category.image}
-              alt={category.name}
-              className="w-full h-40 object-cover"
-            />
-            <div className="p-4 text-center font-semibold">{category.name}</div>
-          </div>
+            <div className="card bg-base-200 shadow-lg hover:shadow-xl transition-all p-6 flex flex-col items-center justify-center h-40 text-center">
+              <span className="text-4xl mb-2">{cat.icon}</span>
+              <h3 className="font-semibold text-lg">{cat.category}</h3>
+            </div>
+          </Link>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 
-export default CategorySection;
+export default CategoryCards;

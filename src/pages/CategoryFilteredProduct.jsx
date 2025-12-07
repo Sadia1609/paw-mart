@@ -1,41 +1,50 @@
-import React from "react";
-import { useParams } from "react-router";
-import { products } from "../data/products";
-
+import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router';
 
 const CategoryFilteredProduct = () => {
   const { categoryName } = useParams();
+  const [products, setProducts] = useState([]);
 
-  const filteredProducts = products.filter(
-    (product) => product.category === categoryName
-  );
+  useEffect(() => {
+    fetch(`http://localhost:3000/services?category=${encodeURIComponent(categoryName)}`)
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((err) => console.log(err));
+  }, [categoryName]);
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6">Category: {categoryName}</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <div
-              key={product.id}
-              className="border rounded shadow p-4 flex flex-col items-center"
-            >
+    <div className="py-12 px-4 sm:px-8 md:px-16 lg:px-36">
+      <h2 className="text-3xl font-bold text-center text-primary mb-8">
+        {categoryName}
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {products.map((product) => (
+          <div key={product._id} className="card bg-base-100 shadow-sm">
+            <figure>
               <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-40 object-cover mb-2"
+                className="w-full h-56 object-cover"
+                src={product?.image}
+                alt={product?.name}
               />
-              <h3 className="font-semibold">{product.name}</h3>
-              <p className="text-gray-600">{product.description}</p>
-              <p className="font-bold mt-1">${product.price}</p>
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title">{product?.name}</h2>
+              <p>Price: ${product?.price}</p>
+              <div className="card-actions justify-end">
+                <Link to={`/details/${product?._id}`}>
+                  <button className="btn btn-primary btn-sm sm:btn-md">
+                    View Details
+                  </button>
+                </Link>
+              </div>
             </div>
-          ))
-        ) : (
-          <p>No products found in this category.</p>
-        )}
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
 export default CategoryFilteredProduct;
+

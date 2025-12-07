@@ -29,7 +29,7 @@ const vets = [
 const MeetOurVets = () => {
     return (
         <div className='py-12 bg-base-100'>
-            <h2 className='text-3xl font-bold text-center text-primary mb-8'>Meet Our Expert Vets</h2>
+            <h2 className='text-3xl font-bold text-center text-black mb-8'>Meet Our Pet Heroes</h2>
 
             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4'>
                 {vets.map((vet) => (
@@ -47,7 +47,6 @@ const MeetOurVets = () => {
                             <p className='text-sm font-semibold'>{vet.specialization}</p>
                             <p className='opacity-70 text-sm'>{vet.experience}</p>
 
-                            <button className='btn btn-primary btn-sm mt-3'>Book Appointment</button>
 
                         </div>
 

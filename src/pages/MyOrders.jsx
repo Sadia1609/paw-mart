@@ -1,72 +1,104 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 
 const MyOrders = () => {
+  const [myOrders, setMyOrders] = useState([]);
 
-    //fetch orders
-    const [myOrders, setMyOrders] = useState([]);
+  // Fetch orders from backend
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/orders")
+      .then((res) => setMyOrders(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
-    useEffect(()=>{
-        axios.get('http://localhost:3000/orders')
-        .then(res=>{
-            setMyOrders(res.data);
-             
-        })
-        .catch(err=>{
-            console.log(err);
-            
-        })
-    }, [])
+  const exportPDF = () => {
+  const doc = new jsPDF();
 
-    console.log(myOrders);
-    
+  doc.setFontSize(18);
+  doc.text("My Orders Report", 14, 22);
+
+  const tableColumn = ["No", "Product Name", "Price", "Phone", "Location", "Quantity", "Date"];
+  const tableRows = myOrders.map((order, index) => [
+    index + 1,
+    order.productName,
+    order.price,
+    order.phone,
+    order.address,
+    order.quantity,
+    new Date(order.date).toLocaleString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    }),
+  ]);
+
+  autoTable(doc, {
+    head: [tableColumn],
+    body: tableRows,
+    startY: 30,
+    styles: { fontSize: 10 },
+    headStyles: { fillColor: [41, 128, 185] },
+  });
+
+  doc.save("my_orders_report.pdf");
+};
 
 
-    return (
-        <div>
-           <div className="overflow-x-auto">
-  <table className="table table-xs">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Product Name</th>
-        <th>Price</th>
-        <th>Phone</th>
-        <th>location</th>
-        <th>Quantity</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-     {
-        myOrders.map((order, index)=>
-             <tr>
-        <th>{index+1}</th>
-        <td>{order?.productName}</td>
-        <td>{order?.price}</td>
-        <td>{order?.phone}</td>
-        <td>{order?.address}</td>
-        <td>{order?.quantity}</td>
-        <td>
-            {new Date(order?.date).toLocaleString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true
-            })}
-        </td>
-      </tr>
-        )
-     }
-      
-    </tbody>
-  </table>
-</div>
-        </div>
-    );
+  return (
+    <div className="p-5">
+      <div className="flex justify-end mb-4">
+        <button className="btn btn-primary btn-sm" onClick={exportPDF}>
+          Export as PDF
+        </button>
+      </div>
+
+      <div className="overflow-x-auto">
+        <table className="table table-xs">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Phone</th>
+              <th>Location</th>
+              <th>Quantity</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {myOrders.map((order, index) => (
+              <tr key={index}>
+                <th>{index + 1}</th>
+                <td>{order.productName}</td>
+                <td>{order.price}</td>
+                <td>{order.phone}</td>
+                <td>{order.address}</td>
+                <td>{order.quantity}</td>
+                <td>
+                  {new Date(order.date).toLocaleString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: true,
+                  })}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 };
 
 export default MyOrders;
+

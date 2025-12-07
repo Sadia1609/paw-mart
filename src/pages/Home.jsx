@@ -16,8 +16,8 @@ const Home = () => {
            </CategoryFilteredProduct>
            </CategorySection>
            <PopularSection></PopularSection>
-           <MeetOurVets></MeetOurVets>
            <WinterCareTips></WinterCareTips>
+           <MeetOurVets></MeetOurVets>
         </div>
     );
 };

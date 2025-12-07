@@ -16,72 +16,72 @@ import MyOrders from "../pages/MyOrders";
 import Contact from "../pages/Contact";
 import Terms from "../pages/Terms";
 import CategoryFilteredProduct from "../pages/CategoryFilteredProduct";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<RootLayout/>,
-    errorElement:<Error></Error>,
+    element: <RootLayout />,
+    errorElement: <Error />,
     children: [
-        {
-            path: '/',
-            element: <Home></Home>
-        },
-        {
-          path:'/services',
-          element: <Services></Services>
-        },
-        {
-          path:'/login',
-          element:<Login></Login>
-        },
-        {
-          path:'/signup',
-          element:<Register></Register>
+      { 
+        path: "/", 
+        element: <Home /> 
+      },
+      { 
+        path: "/services", 
+        element: <Services /> 
+      },
+      { 
+        path: "/login", 
+        element: <Login /> 
+      },
+      { 
+        path: "/signup", 
+        element: <Register /> 
+      },
+      { 
+        path: "/profile", 
+        element: <PrivateRoute><Profile /></PrivateRoute> 
+      },
+      { 
+        path: "/details/:id", 
+        element: <PrivateRoute><ServiceDetails /></PrivateRoute> 
+      },
+      { 
+        path: "/forget/:email", 
+        element: <ForgetPass /> 
+      },
+      { 
+        path: "/add-services", 
+        element: <PrivateRoute><AddService /></PrivateRoute> 
+      },
+      { 
+        path: "/my-services", 
+        element: <PrivateRoute><MyServices /></PrivateRoute> 
+      },
+      { 
+        path: "/my-orders", 
+        element: <PrivateRoute><MyOrders /></PrivateRoute> 
+      },
+      { 
+        path: "/update-services/:id", 
+        element: <PrivateRoute><UpdateService /></PrivateRoute> 
+      },
+      { 
+        path: "/contact", 
+        element: <PrivateRoute><Contact /></PrivateRoute> 
+      },
+      { 
+        path: "/terms", 
+        element: <PrivateRoute><Terms /></PrivateRoute> 
+      },
 
-        },
-        {
-          path:'/profile',
-          element:<PrivateRoute><Profile></Profile></PrivateRoute>
-        },
-        {
-          path:'/details/:id',
-          element:<PrivateRoute><ServiceDetails></ServiceDetails></PrivateRoute>
-        },
-        {
-          path:'/forget/:email',
-          element:<ForgetPass></ForgetPass>
-        },
-        {
-          path:'/add-services',
-          element:<PrivateRoute><AddService></AddService></PrivateRoute>
-        },
-        {
-          path:'/my-services',
-          element:<PrivateRoute><MyServices></MyServices></PrivateRoute>
-        },
-         {
-          path:'/my-orders',
-          element:<PrivateRoute><MyOrders></MyOrders></PrivateRoute>
-        },
-        {
-          path:'/update-services/:id',
-          element:<PrivateRoute><UpdateService></UpdateService></PrivateRoute>
-        },
-
-        {
-          path:'/contact',
-          element:<PrivateRoute><Contact></Contact></PrivateRoute>
-        },
-
-        {
-          path:'/terms',
-          element:<PrivateRoute><Terms></Terms></PrivateRoute>
-        },
-        {
-          path:"/category-filtered-product/:categoryName",
-          element:<CategoryFilteredProduct />
-        }
-    ]
+      
+      { 
+        path: "/category-filtered-product/:categoryName", 
+        element: <CategoryFilteredProduct /> 
+      },
+    ],
   },
 ]);
 

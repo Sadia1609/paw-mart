@@ -80,7 +80,7 @@ const UpdateService = () => {
       <h2 className="text-2xl font-semibold text-center mb-6">Update Listing</h2>
 
       <form onSubmit={handleUpdate} className="space-y-4">
-        {/* Pet Name */}
+       
         <div>
           <label className="block mb-1 font-medium">Product/Pet Name</label>
           <input
@@ -93,7 +93,7 @@ const UpdateService = () => {
           />
         </div>
 
-        {/* Category */}
+       
         <div>
           <label className="block mb-1 font-medium">Category</label>
           <select

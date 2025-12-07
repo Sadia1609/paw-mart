@@ -1,212 +1,147 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router'; 
+import { Link } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import { signOut } from 'firebase/auth';
 import auth from '../firebase/firebase.config';
 import pawLogo from '../assets/logo.png';
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
- const [isChecked, setIsChecked] = useState(() => {
-  const savedTheme = localStorage.getItem("theme");
-  return savedTheme === "dark";
-});
 
+  const [isChecked, setIsChecked] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme === "dark";
+  });
+  const [menuOpen, setMenuOpen] = useState(false);
 
+  useEffect(() => {
+    const theme = isChecked ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [isChecked]);
 
-  //toggle
- 
-   useEffect(() => {
-  const theme = isChecked ? "dark" : "light";
-  document.documentElement.setAttribute("data-theme", theme);
+  const handleThemeChange = () => setIsChecked(prev => !prev);
 
-  localStorage.setItem("theme", theme);
-}, [isChecked]);
-
- const handleThemeChange = ()=>{
-    setIsChecked(prev => !prev);
-  }
-
-
-  const handleSignout = () => {
-    signOut(auth);
-  };
+  const handleSignout = () => signOut(auth);
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
-          >
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/services">Pets & Supplies</Link>
-            </li>
+    <nav className="bg-base-100 shadow-sm fixed w-full z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
 
-           
-           
-           {
-            user && (
-              <>
-               
-              <Link to={"/profile"}></Link>
-            
-            <li>
-              <Link to={"/add-services"}>Add Listing</Link>
-            </li>
-            <li>
-              <Link to={"/my-services"}>My Listings</Link>
-          </li>
-           <li>
-              <Link to={"/my-orders"}>My Orders</Link>
-          </li>
-              </>
-            )
-           }
-          </ul>
-        </div>
-       <div className="flex items-center gap-2">
-        <img src={pawLogo} alt="" className="h-8 w-8" />
-        <span className="text-xl font-bold">PawMart</span>
-      </div>
-
-      </div>
-
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/services">Pets & Supplies</Link>
-          </li>
-         {
-            user && (
-              <>
-               
-              <Link to={"/profile"}></Link>
-           
-            <li>
-              <Link to={"/add-services"}>Add Listing</Link>
-            </li>
-            <li>
-              <Link to={"/my-services"}>My Listings</Link>
-          </li>
-          <li>
-              <Link to={"/my-orders"}>My Orders</Link>
-          </li>
-              </>
-            )
-           }
-        </ul>
-      </div>
-
-       <div className='navbar-end'>
-           <label className="flex cursor-pointer gap-2">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round">
-    <circle cx="12" cy="12" r="5" />
-    <path
-      d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-  </svg>
-  <input onClick={handleThemeChange} checked={isChecked} type="checkbox" value="synthwave" className="toggle theme-controller" />
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round">
-    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-  </svg>
-</label>
-
-         </div>
-
-
-      <div className="navbar-end gap-4">
-       
-      
-        {user ? (
-
-
-<>
-
-
-        <Link to={'/profile'} className="avatar cursor-pointer">
-        <div className="w-10 h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-          <img
-            src={user.photoURL}
-            alt="Profile"
-          />
-        </div>
-      </Link>
-
-
-        
-          <button onClick={handleSignout} className="btn">
-            
-            Logout
-          </button>
-          </>
-        ) : (
-          <>
-
-
-          <div className="flex items-center space-x-2">
-            <Link to="/login" className="btn btn-sm">
-              Login
+          
+          <div className="flex items-center gap-2">
+            <Link to="/">
+              <img src={pawLogo} alt="PawMart Logo" className="h-8 w-8" />
             </Link>
-
-            <Link to="/signup" className="btn btn-neutral btn-sm">
-              Register
-            </Link>
+            <span className="font-bold text-xl">PawMart</span>
           </div>
 
-            </>
-        )}
-      </div> 
+          
+          <div className="hidden lg:flex items-center space-x-4">
+            <Link className="hover:text-primary" to="/">Home</Link>
+            <Link className="hover:text-primary" to="/services">Pets & Supplies</Link>
+            {user && (
+              <>
+                <Link className="hover:text-primary" to="/add-services">Add Listing</Link>
+                <Link className="hover:text-primary" to="/my-services">My Listings</Link>
+                <Link className="hover:text-primary" to="/my-orders">My Orders</Link>
+              </>
+            )}
+          </div>
 
-       
+          
+          <div className="flex items-center gap-2">
+            <label className="flex cursor-pointer gap-1 items-center">
+              <input
+                type="checkbox"
+                className="toggle"
+                checked={isChecked}
+                onChange={handleThemeChange}
+              />
+              <span className="text-sm">{isChecked ? "Dark" : "Light"}</span>
+            </label>
+          </div>
 
+          
+          <div className="hidden lg:flex items-center gap-2">
+            {user ? (
+              <>
+                <Link to="/profile" className="avatar">
+                  <div className="w-10 h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                    <img src={user.photoURL} alt="Profile" />
+                  </div>
+                </Link>
+                <button className="btn btn-sm" onClick={handleSignout}>Logout</button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="btn btn-sm">Login</Link>
+                <Link to="/signup" className="btn btn-neutral btn-sm">Register</Link>
+              </>
+            )}
+          </div>
 
+          
+          <div className="lg:hidden flex items-center">
+            <button onClick={() => setMenuOpen(!menuOpen)} className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
 
-
-
-      
-
-    </div>
+     
+      {menuOpen && (
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="lg:hidden bg-base-100 shadow-md"
+        >
+          <ul className="flex flex-col p-4 space-y-2">
+            <li>
+              <Link onClick={() => setMenuOpen(false)} to="/">Home</Link>
+            </li>
+            <li>
+              <Link onClick={() => setMenuOpen(false)} to="/services">Pets & Supplies</Link>
+            </li>
+            {user && (
+              <>
+                <li>
+                  <Link onClick={() => setMenuOpen(false)} to="/add-services">Add Listing</Link>
+                </li>
+                <li>
+                  <Link onClick={() => setMenuOpen(false)} to="/my-services">My Listings</Link>
+                </li>
+                <li>
+                  <Link onClick={() => setMenuOpen(false)} to="/my-orders">My Orders</Link>
+                </li>
+                <li>
+                  <Link onClick={() => setMenuOpen(false)} to="/profile">Profile</Link>
+                </li>
+                <li>
+                  <button onClick={handleSignout} className="btn w-full">Logout</button>
+                </li>
+              </>
+            )}
+            {!user && (
+              <>
+                <li>
+                  <Link onClick={() => setMenuOpen(false)} to="/login" className="btn w-full">Login</Link>
+                </li>
+                <li>
+                  <Link onClick={() => setMenuOpen(false)} to="/signup" className="btn w-full btn-neutral">Register</Link>
+                </li>
+              </>
+            )}
+          </ul>
+        </motion.div>
+      )}
+    </nav>
   );
 };
 
