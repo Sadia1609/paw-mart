@@ -54,6 +54,9 @@ const Navbar = () => {
             <li>
               <Link to={"/my-services"}>My Services</Link>
           </li>
+           <li>
+              <Link to={"/my-orders"}>My Orders</Link>
+          </li>
               </>
             )
            }
@@ -81,6 +84,9 @@ const Navbar = () => {
             </li>
             <li>
               <Link to={"/my-services"}>My Services</Link>
+          </li>
+          <li>
+              <Link to={"/my-orders"}>My Orders</Link>
           </li>
               </>
             )
