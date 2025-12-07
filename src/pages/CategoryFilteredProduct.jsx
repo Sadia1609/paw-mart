@@ -6,7 +6,7 @@ const CategoryFilteredProduct = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/services?category=${encodeURIComponent(categoryName)}`)
+    fetch(`https://paw-mart-two.vercel.app/services?category=${encodeURIComponent(categoryName)}`)
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.log(err));

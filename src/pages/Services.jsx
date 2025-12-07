@@ -9,7 +9,7 @@ const Services = () => {
 
   // Fetch services based on category and search
   useEffect(() => {
-    let url = `http://localhost:3000/services?category=${category}`;
+    let url = `https://paw-mart-two.vercel.app/services?category=${category}`;
     if (search) {
       url += `&search=${encodeURIComponent(search)}`; // add search query param
     }

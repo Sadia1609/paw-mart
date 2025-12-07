@@ -43,7 +43,7 @@ const AddService = () => {
         }
 
         console.log(formData);
-        axios.post('http://localhost:3000/services', formData)
+        axios.post('https://paw-mart-two.vercel.app/services', formData)
         .then(res=>{
             console.log(res);
             

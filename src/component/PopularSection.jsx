@@ -5,7 +5,7 @@ const PopularSection = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/recent-services')
+    fetch('https://paw-mart-two.vercel.app/recent-services')
       .then(res => res.json())
       .then(data => setServices(data))
       .catch(err => console.log(err));

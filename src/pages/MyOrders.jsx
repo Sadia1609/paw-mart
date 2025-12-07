@@ -10,7 +10,7 @@ const MyOrders = () => {
   // Fetch orders from backend
   useEffect(() => {
     axios
-      .get("http://localhost:3000/orders")
+      .get("https://paw-mart-two.vercel.app/orders")
       .then((res) => setMyOrders(res.data))
       .catch((err) => console.log(err));
   }, []);

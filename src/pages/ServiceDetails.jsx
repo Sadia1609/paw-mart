@@ -17,7 +17,7 @@ const ServiceDetails = () => {
     
         
           useEffect(() => {
-            fetch(`http://localhost:3000/services/${id}`)
+            fetch(`https://paw-mart-two.vercel.app/services/${id}`)
               .then(res => res.json())
               .then(data => setService(data))
               .catch(err => console.log(err));
@@ -52,7 +52,7 @@ const ServiceDetails = () => {
 
             }
 
-            axios.post('http://localhost:3000/orders', formData)
+            axios.post('https://paw-mart-two.vercel.app/orders', formData)
             .then(res=>{
               console.log(res);
               toast.success("Order Placed Successfully!");
