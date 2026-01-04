@@ -10,12 +10,20 @@ const UpdateService = () => {
   const [category, setCategory] = useState(service?.category);
   const navigation = useNavigate();
 
+  // API base URL
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
   useEffect(() => {
-    axios.get(`https://paw-mart-two.vercel.app/services/${id}`).then((res) => {
-      setService(res.data);
-      setCategory(res.data.category);
-    });
-  }, [id]);
+    // axios.get(`https://paw-mart-two.vercel.app/services/${id}`)
+
+    axios
+      .get(`${API_BASE_URL}/services/${id}`)
+
+      .then((res) => {
+        setService(res.data);
+        setCategory(res.data.category);
+      });
+  }, [API_BASE_URL, id]);
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -46,7 +54,7 @@ const UpdateService = () => {
     console.log(formData);
 
     axios
-      .put(`https://paw-mart-two.vercel.app/update/${id}`, formData)
+      .put(`${API_BASE_URL}/update/${id}`, formData)
       .then((res) => {
         console.log(res.data);
         navigation("/my-services");

@@ -8,14 +8,44 @@ import { AuthContext } from "../Provider/AuthProvider";
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const [myOrders, setMyOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // // Fetch orders from backend
+  // useEffect(() => {
+  //   axios
+  //     .get(`https://paw-mart-two.vercel.app/orders/${user?.email}`)
+  //     .then((res) => setMyOrders(res.data))
+  //     .catch((err) => console.log(err));
+  // }, [user?.email]);
+
+  // API base URL
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
   // Fetch orders from backend
   useEffect(() => {
+    if (!user?.email) {
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    // Method 1: Using axios
     axios
-      .get(`https://paw-mart-two.vercel.app/orders/${user?.email}`)
-      .then((res) => setMyOrders(res.data))
-      .catch((err) => console.log(err));
-  }, [user?.email]);
+      .get(`${API_BASE_URL}/orders/${user.email}`)
+      .then((res) => {
+        console.log("Orders data:", res.data);
+        setMyOrders(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching orders:", err);
+        setError("Failed to load orders. Please try again.");
+        setLoading(false);
+      });
+  }, [user?.email, API_BASE_URL]);
 
   const exportPDF = () => {
     const doc = new jsPDF();
@@ -59,6 +89,33 @@ const MyOrders = () => {
 
     doc.save("my_orders_report.pdf");
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="text-center">
+          <span className="loading loading-spinner loading-lg"></span>
+          <p className="mt-4">Loading your orders...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-12">
+        <div className="text-error text-5xl mb-4">⚠️</div>
+        <h3 className="text-xl font-semibold mb-2">Error Loading Orders</h3>
+        <p className="text-gray-600 mb-4">{error}</p>
+        <button
+          className="btn btn-primary"
+          onClick={() => window.location.reload()}
+        >
+          Try Again
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="p-5">

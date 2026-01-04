@@ -1,24 +1,42 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const PopularSection = () => {
   const [services, setServices] = useState([]);
 
-  useEffect(() => {
-    axios.get('https://paw-mart-two.vercel.app/recent-services')
-      .then(res=>{
-        setServices(res.data)
-        console.log(res.data);
-        
-      })
-      .catch(err => {
-        console.log(err);
-        
-      })
-  }, []);
+  // useEffect(() => {
+  //   axios.get('https://paw-mart-two.vercel.app/recent-services')
+  //     .then(res=>{
+  //       setServices(res.data)
+  //       console.log(res.data);
 
-  
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+
+  //     })
+  // }, []);
+
+  // API base URL
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+  // Fetch services based on category and search
+  useEffect(() => {
+    let url = `/api/services?recent-services`;
+
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => setServices(data))
+      .catch((err) => {
+        console.error("Fetch error:", err);
+        // Optionally show error message to user
+      });
+  }, [API_BASE_URL]);
 
   return (
     <div className="mt-8 px-4 md:px-10 lg:px-[130px]">
@@ -26,11 +44,11 @@ const PopularSection = () => {
         <h3 className="font-bold text-2xl md:text-3xl text-center">
           Recent Listings
         </h3>
-        <p className='text-center'>Freshly Added pets and supplies</p>
+        <p className="text-center">Freshly Added pets and supplies</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-12 gap-8 md:gap-10">
-        {services.map(service => (
+        {services.map((service) => (
           <div key={service._id} className="card bg-base-100 w-full shadow-sm">
             <figure>
               <img
@@ -47,7 +65,9 @@ const PopularSection = () => {
               </div>
               <div className="card-actions justify-end">
                 <Link to={`/details/${service._id}`}>
-                  <button className="btn btn-primary btn-sm sm:btn-md">View Details</button>
+                  <button className="btn btn-primary btn-sm sm:btn-md">
+                    View Details
+                  </button>
                 </Link>
               </div>
             </div>

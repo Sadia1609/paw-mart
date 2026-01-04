@@ -1,35 +1,68 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router';
+// import React, { useEffect, useState } from "react";
+// import { Link } from "react-router";
+// import { motion } from "motion/react";
+
+// const Services = () => {
+//   const [services, setServices] = useState([]);
+//   const [category, setCategory] = useState("");
+//   const [search, setSearch] = useState(""); // <-- search state
+
+//   // Fetch services based on category and search
+//   useEffect(() => {
+//     let url = `https://paw-mart-two.vercel.app/services?category=${category}`;
+//     if (search) {
+//       url += `&search=${encodeURIComponent(search)}`; // add search query param
+//     }
+
+//     fetch(url)
+//       .then((res) => res.json())
+//       .then((data) => setServices(data))
+//       .catch((err) => console.log(err));
+//   }, [category, search]);
+
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router";
 import { motion } from "motion/react";
 
 const Services = () => {
   const [services, setServices] = useState([]);
-  const [category, setCategory] = useState('');
-  const [search, setSearch] = useState(''); // <-- search state
+  const [category, setCategory] = useState("");
+  const [search, setSearch] = useState("");
+
+  // API base URL
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
   // Fetch services based on category and search
   useEffect(() => {
-    let url = `https://paw-mart-two.vercel.app/services?category=${category}`;
+    let url = `/api/services?category=${category}`;
     if (search) {
-      url += `&search=${encodeURIComponent(search)}`; // add search query param
+      url += `&search=${encodeURIComponent(search)}`;
     }
 
     fetch(url)
-      .then(res => res.json())
-      .then(data => setServices(data))
-      .catch(err => console.log(err));
-  }, [category, search]);
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => setServices(data))
+      .catch((err) => {
+        console.error("Fetch error:", err);
+        // Optionally show error message to user
+      });
+  }, [category, search, API_BASE_URL]);
 
   return (
     <div className="px-4 sm:px-8 md:px-16 lg:px-36 py-8 sm:py-12">
       <title>PawMart | Products</title>
       <div>
-        <h3 className="font-bold text-center text-3xl text-blue-400">Fresh Pet & Supplies</h3>
+        <h3 className="font-bold text-center text-3xl text-blue-400">
+          Fresh Pet & Supplies
+        </h3>
       </div>
 
-      
       <div className="flex flex-col sm:flex-row justify-center items-center mt-8 gap-4">
-      
         <select
           onChange={(e) => setCategory(e.target.value)}
           value={category}
@@ -42,7 +75,6 @@ const Services = () => {
           <option value="care-products">Care Products</option>
         </select>
 
-       
         <input
           type="text"
           placeholder="Search by name..."
@@ -52,9 +84,8 @@ const Services = () => {
         />
       </div>
 
-     
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8 gap-6 sm:gap-8 md:gap-10">
-        {services.map(service => (
+        {services.map((service) => (
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1, transition: { duration: 1 } }}
@@ -76,7 +107,9 @@ const Services = () => {
               </div>
               <div className="card-actions justify-end mt-2">
                 <Link to={`/details/${service?._id}`}>
-                  <button className="btn btn-primary btn-sm sm:btn-md">View Details</button>
+                  <button className="btn btn-primary btn-sm sm:btn-md">
+                    View Details
+                  </button>
                 </Link>
               </div>
             </div>
@@ -88,5 +121,3 @@ const Services = () => {
 };
 
 export default Services;
-
-

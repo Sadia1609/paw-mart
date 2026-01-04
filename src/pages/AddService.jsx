@@ -6,6 +6,9 @@ import Swal from "sweetalert2";
 const AddService = () => {
   const { user } = useContext(AuthContext);
 
+  // API base URL
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -33,7 +36,8 @@ const AddService = () => {
 
     console.log(formData);
     axios
-      .post("https://paw-mart-two.vercel.app/services", formData)
+      // .post("https://paw-mart-two.vercel.app/services", formData)
+      .post(`${API_BASE_URL}/services`, formData)
       .then((res) => {
         console.log(res);
 

@@ -8,14 +8,18 @@ const MyServices = () => {
   const [myServices, setMyServices] = useState([]);
   const { user } = useContext(AuthContext);
 
+  // API base URL
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`https://paw-mart-two.vercel.app/my-services?email=${user.email}`)
+    // fetch(`https://paw-mart-two.vercel.app/my-services?email=${user.email}`)
+    fetch(`${API_BASE_URL}/my-services?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setMyServices(data))
       .catch((err) => console.log(err));
-  }, [user?.email]);
+  }, [API_BASE_URL, user.email]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -29,7 +33,7 @@ const MyServices = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`https://paw-mart-two.vercel.app/delete/${id}`)
+          .delete(`${API_BASE_URL}/delete/${id}`)
           .then((res) => {
             console.log(res.data);
             if (res.data.deletedCount == 1) {

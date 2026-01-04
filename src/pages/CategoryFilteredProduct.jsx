@@ -5,20 +5,42 @@ const CategoryFilteredProduct = () => {
   const { categoryName } = useParams();
   const [products, setProducts] = useState([]);
 
+  // useEffect(() => {
+  //   fetch(
+  //     `https://paw-mart-two.vercel.app/services?category=${encodeURIComponent(
+  //       categoryName
+  //     )}`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => setProducts(data))
+  //     .catch((err) => console.log(err));
+  // }, [categoryName]);
+
+  // API base URL
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+  // Fetch services based on category and search
   useEffect(() => {
-    fetch(
-      `https://paw-mart-two.vercel.app/services?category=${encodeURIComponent(
-        categoryName
-      )}`
-    )
-      .then((res) => res.json())
+    let url = `/api/services?category=${encodeURIComponent(categoryName)}`;
+
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => setProducts(data))
-      .catch((err) => console.log(err));
-  }, [categoryName]);
+      .catch((err) => {
+        console.error("Fetch error:", err);
+        // Optionally show error message to user
+      });
+  }, [API_BASE_URL, categoryName]);
 
   return (
     <div className="py-12 px-4 sm:px-8 md:px-16 lg:px-36">
       <title>Products</title>
+
       <h2 className="text-3xl font-bold text-center text-primary mb-8">
         {categoryName}
       </h2>
