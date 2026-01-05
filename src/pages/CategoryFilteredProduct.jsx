@@ -21,7 +21,7 @@ const CategoryFilteredProduct = () => {
 
   // Fetch services based on category and search
   useEffect(() => {
-    let url = `/api/services?category=${encodeURIComponent(categoryName)}`;
+    let url = `${API_BASE_URL}/services?category=${encodeURIComponent(categoryName)}`;
 
     fetch(url)
       .then((res) => {
