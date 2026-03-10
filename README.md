@@ -106,10 +106,3 @@ React.js, React Router, Tailwind CSS, Firebase Authentication, Axios, Framer Mot
 - Backend:
 Node.js, Express.js, MongoDB, CORS, Dotenv
 
-Express.js
-
-MongoDB
-
-CORS
-
-Dotenv
