@@ -12,29 +12,29 @@ PawMart is a community-driven platform built for pet owners, breeders, and pet s
 
 ---
 
-## 🚀 Features
+## Features
 
-🐶 Pet Adoption + Pet Supply Marketplace with category filtering
+Pet adoption and pet supply marketplace with category filtering.
 
-🔐 Secure Authentication using Firebase (Email/Password + Google Login)
+Secure authentication using Firebase (Email/Password and Google login).
 
-📦 Add Listings, Manage Listings, and Order Products/Pets
+Add, manage, and order pets or products.
 
-🧾 Order PDF Report Download using jsPDF & AutoTable
+Download order reports as PDF using jsPDF & AutoTable.
 
-🎨 Modern UI + Animations using Tailwind, Framer Motion, and Typewriter
+Modern UI with animations using Tailwind CSS, Framer Motion, and Typewriter effect.
 
-🌙 Dark/Light Mode Toggle (Bonus Feature)
+Dark/Light mode toggle (bonus feature).
 
-🔄 Full CRUD Operations with Toast Notifications
+Full CRUD operations with toast notifications.
 
-📱 100% Responsive across mobile, tablet, and desktop
+Fully responsive across mobile, tablet, and desktop devices.
 
 ---
 
 ## 🏗️ Project Pages & Structure
 
-#### 🔹 Home Page
+####  Home Page
 
 Banner slider with meaningful pet images
 
@@ -48,7 +48,7 @@ Why Adopt from PawMart
 
 Meet Our Pet Heroes
 
-## 🔹 Authentication
+##  Authentication
 
 Login / Register with validations
 
@@ -56,13 +56,13 @@ Google Sign-in
 
 react-hot-toast for alerts
 
-## 🔹 Pets & Supplies Page
+##  Pets & Supplies Page
 
 Full product listing grid
 
 Category filtering + Search
 
-## 🔹 Add Listing (Private)
+##  Add Listing (Private)
 
 Add new pets/products
 
@@ -70,7 +70,7 @@ Auto-fill user email
 
 Toast on success
 
-## 🔹 Listing Details (Private)
+##  Listing Details (Private)
 
 View full details
 
@@ -78,26 +78,26 @@ View full details
 
 Save order to MongoDB
 
-## 🔹 My Listings (Private)
+##  My Listings (Private)
 
 Update/Delete user's own listings
 
 Data table layout
 
-## 🔹 My Orders (Private)
+##  My Orders (Private)
 
 List of orders made by user
 
 Download Report (PDF)
 
-## 🔹 Other Pages
+##  Other Pages
 
 404 Page
 
 
 Responsive Navbar + Footer
 
-🗄️ Tech Stack
+ Tech Stack
 Frontend
 
 React.js
