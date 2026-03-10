@@ -32,7 +32,7 @@ PawMart is a community-driven platform built for pet owners, breeders, and pet s
 
 ---
 
-## 🏗️ Project Pages & Structure
+##  Project Pages & Structure
 
 ####  Home Page
 
