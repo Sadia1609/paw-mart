@@ -2,15 +2,15 @@
 
 ---
 
+PawMart is a community-driven platform built for pet owners, breeders, and pet shops to list pets for adoption and sell pet-related products. Users can browse listings, view details, adopt pets, place orders, and manage their own listings—all through a clean and modern UI.
+
+---
+
 <img src = "https://i.postimg.cc/pdNhQRnh/paw.png" alt = "pawmart"/>
 
 Live Client: https://pet-care-8ba14.web.app/
 
 Live Server: https://paw-mart-two.vercel.app/
-
----
-
-PawMart is a community-driven platform built for pet owners, breeders, and pet shops to list pets for adoption and sell pet-related products. Users can browse listings, view details, adopt pets, place orders, and manage their own listings—all through a clean and modern UI.
 
 ---
 
