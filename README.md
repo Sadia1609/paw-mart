@@ -6,7 +6,7 @@ PawMart is a community-driven platform built for pet owners, breeders, and pet s
 
 ---
 
-<img src = "https://i.postimg.cc/pdNhQRnh/paw.png" alt = "pawmart"/>
+<img src = "https://i.postimg.cc/pdNhQRnh/paw.png" alt = "pawmart" size="50%"/>
 
 Live Client: https://pet-care-8ba14.web.app/
 
