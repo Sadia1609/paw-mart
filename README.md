@@ -108,3 +108,50 @@ React.js, React Router, Tailwind CSS, Firebase Authentication, Axios, Framer Mot
 - Backend:
 Node.js, Express.js, MongoDB, CORS, Dotenv
 
+---
+# PawMart - Installation Setup (Short & Simple)
+
+## Quick Setup
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/your-username/pawmart.git
+cd pawmart
+```
+
+### 2️⃣ Backend Setup
+```bash
+cd backend
+npm install
+# Create .env file and add:
+# MONGODB_URI=your_mongodb_url
+# PORT=5000
+npm run dev
+```
+
+### 3️⃣ Frontend Setup
+```bash
+cd frontend
+npm install
+# Create .env file and add:
+# VITE_FIREBASE_API_KEY=your_firebase_key
+npm run dev
+```
+
+### 4️⃣ What You Need
+- **MongoDB Atlas** - Create free cluster
+- **Firebase** - Enable Authentication (Email/Google)
+
+### ✅ Done!
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3000
+
+---
+
+## One-Line Install:
+```bash
+cd backend && npm install && cd ../frontend && npm install && cd ..
+```
+
+**Note:** Don't forget to add your own Firebase config and MongoDB URI!
+
