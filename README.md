@@ -125,7 +125,7 @@ cd backend
 npm install
 # Create .env file and add:
 # MONGODB_URI=your_mongodb_url
-# PORT=5000
+# PORT=3000
 npm run dev
 ```
 
